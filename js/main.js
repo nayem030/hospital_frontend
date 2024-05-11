@@ -47,7 +47,7 @@ const displayService = (services) => {
         const parent = document.getElementById("service-container");
         const li = document.createElement("li");
         li.innerHTML = `
-        <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center md-5">
+        <div class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center mb-5">
         <img class="doc-img" src=${service.image} alt="" />
         <h4 class="mb-3">${service.name}</h4>
         <p class="m-0">${service.description}</p>
