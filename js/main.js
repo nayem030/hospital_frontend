@@ -78,6 +78,26 @@ fetch('https://medi-care-tmgp.onrender.com/doctor/department/')
         console.error('Error fetching department data:', error);
     });
 
+
+fetch('https://medi-care-tmgp.onrender.com/doctor/list/')
+    .then(response => response.json())
+    .then(data => {
+        // Select the dropdown element
+        const selectElement = document.getElementById('doctorSelect');
+
+        // Loop through the data and populate the dropdown with options
+        data.forEach(doctor => {
+            const option = document.createElement('option');
+            option.value = doctor.id; // Assuming department object has an 'id' property
+            option.text = doctor.user; // Assuming department object has a 'name' property
+            selectElement.appendChild(option);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching department data:', error);
+    });
+
+
 // Function to create a team item HTML structure
 function createTeamItem(doctor) {
     return `
