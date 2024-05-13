@@ -78,6 +78,44 @@ fetch('https://medi-care-tmgp.onrender.com/doctor/department/')
         console.error('Error fetching department data:', error);
     });
 
+// Function to create a team item HTML structure
+function createTeamItem(doctor) {
+    return `
+        <div class="team-item mb-5">
+            <div class="row g-0 bg-light rounded overflow-hidden">
+                <div class="col-12 col-sm-5 h-100">
+                    <img class="img-fluid h-100" src="${doctor.image}" style="object-fit: cover;">
+                </div>
+                <div class="col-12 col-sm-7 h-100 d-flex flex-column">
+                    <div class="mt-auto p-4">
+                        <h3>Dr.${doctor.user}</h3>
+                        <h6 class="fw-normal fst-italic text-primary mb-4">${doctor.specialization}</h6>
+                        <p class="m-0">${doctor.designation}</p>
+                    </div>
+                    <div class="d-flex mt-auto border-top p-4">
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded-circle me-3" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded-circle" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Fetch team data from the API
+fetch('https://medi-care-tmgp.onrender.com/doctor/list/')
+    .then(response => response.json())
+    .then(team => {
+        const teamContainer = document.getElementById('teamContainer');
+        team.forEach(doctor => {
+            const teamItemHtml = createTeamItem(doctor);
+            teamContainer.innerHTML += teamItemHtml;
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching team data:', error);
+    });
 
 loadPricing();
 loadServices();
