@@ -60,5 +60,24 @@ const displayService = (services) => {
     });
 };
 
+fetch('https://medi-care-tmgp.onrender.com/doctor/department/')
+    .then(response => response.json())
+    .then(data => {
+        // Select the dropdown element
+        const selectElement = document.getElementById('departmentSelect');
+
+        // Loop through the data and populate the dropdown with options
+        data.forEach(department => {
+            const option = document.createElement('option');
+            option.value = department.id; // Assuming department object has an 'id' property
+            option.text = department.name; // Assuming department object has a 'name' property
+            selectElement.appendChild(option);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching department data:', error);
+    });
+
+
 loadPricing();
 loadServices();
