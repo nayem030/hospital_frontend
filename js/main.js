@@ -172,5 +172,50 @@ document.getElementById('submitBtn').addEventListener('click', function() {
         });
 });
 
+function register() {
+    // Get form data
+    const username = document.getElementById('username').value;
+    const firstName = document.getElementById('firstName').value;
+    const lastName = document.getElementById('lastName').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    console.log("nayem");
+
+    // Construct request body
+    const requestBody = {
+        username: username,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        password: password
+    };
+
+    // Send POST request to API
+    fetch('https://medi-care-tmgp.onrender.com/patient/register/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestBody)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle successful response
+            console.log('Registration successful:', data);
+            // Optionally, redirect user or show a success message
+        })
+        .catch(error => {
+            // Handle error
+            console.error('Error during registration:', error);
+            // Optionally, display an error message to the user
+        });
+}
+
+
 loadPricing();
 loadServices();
