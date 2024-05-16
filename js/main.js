@@ -137,5 +137,40 @@ fetch('https://medi-care-tmgp.onrender.com/doctor/list/')
         console.error('Error fetching team data:', error);
     });
 
+
+document.getElementById('submitBtn').addEventListener('click', function() {
+    const department = document.getElementById('departmentSelect').value;
+    console.log(department);
+    const doctor = document.getElementById('doctorSelect').value;
+    console.log(doctor);
+    const name = document.getElementById('nameInput').value;
+    const email = document.getElementById('emailInput').value;
+    const date = document.getElementById('dateInput').value;
+    const time = document.getElementById('timeInput').value;
+
+    const formData = {
+
+        name: name,
+        email: email,
+        date: date,
+        time: time,
+        doctor: doctor,
+        department: department,
+    };
+
+    // Send form data to REST API
+    fetch('https://medi-care-tmgp.onrender.com/appointment/appointment/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+        });
+});
+
 loadPricing();
 loadServices();
